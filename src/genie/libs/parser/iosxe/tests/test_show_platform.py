@@ -1128,6 +1128,7 @@ class test_show_inventory(unittest.TestCase):
     dev2 = Device(name='semi_empty')
     dev_asr1k = Device(name='asr1k')
     dev_c3850 = Device(name='c3850')
+    dev_c4500x = Device(name='c4500x')
     empty_output = {'execute.return_value': ''}
     semi_empty_output = {'execute.return_value': '''/
 NAME: "c38xx Stack", DESCR: "c38xx Stack"
@@ -1577,6 +1578,220 @@ NAME: "Power Supply Module 1", DESCR: "Cisco ASR1006 AC Power Supply"
 PID: ASR1006-PWR-AC    , VID: V01  , SN: ART1210Q04C
 '''}
 
+    golden_parsed_output_c4500x = {
+            'slot': {
+                '1': {
+                    'lc': {
+                        'builtin': {
+                            'subslot': {
+                                '1': {
+                                    'SFP-10G-SR': {
+                                        'descr': 'SFP-10Gbase-SR',
+                                        'name': 'TenGigabitEthernet1/1',
+                                        'pid': 'SFP-10G-SR',
+                                        'sn': 'AVD1239A4CD',
+                                        'vid': 'V03'
+                                        }
+                                    },
+                                '2': {
+                                    'SFP-10G-SR': {
+                                        'descr': 'SFP-10Gbase-SR',
+                                        'name': 'TenGigabitEthernet1/2',
+                                        'pid': 'SFP-10G-SR',
+                                        'sn': 'AVD1239A4DE',
+                                        'vid': 'V03'
+                                        }
+                                    },
+                                '3': {
+                                    'SFP-GE-T': {
+                                        'descr': '1000BaseT',
+                                        'name': 'TenGigabitEthernet1/3',
+                                        'pid': 'SFP-GE-T',
+                                        'sn': 'MTC123300EF',
+                                        'vid': 'V02'
+                                        }
+                                    },
+                                '4': {
+                                    'SFP-10G-SR-S': {
+                                        'descr': 'SFP-10Gbase-SR',
+                                        'name': 'TenGigabitEthernet1/4',
+                                        'pid': 'SFP-10G-SR-S',
+                                        'sn': 'AVD1233DUFG',
+                                        'vid': 'V01'
+                                        }
+                                    },
+                                '5': {
+                                    'GLC-SX-MMD': {
+                                        'descr': '1000BaseSX',
+                                        'name': 'TenGigabitEthernet1/5',
+                                        'pid': 'GLC-SX-MMD',
+                                        'sn': 'FNS12300JGH',
+                                        'vid': 'V01'
+                                        }
+                                    },
+                                '6': {
+                                    'SFP-10G-SR-S': {
+                                        'descr': 'SFP-10Gbase-SR',
+                                        'name': 'TenGigabitEthernet1/6',
+                                        'pid': 'SFP-10G-SR-S',
+                                        'sn': 'AVD1236DNHI',
+                                        'vid': 'V01'
+                                        }
+                                    },
+                                '7': {
+                                        'SFP-10G-LR-S': {
+                                            'descr': 'SFP-10Gbase-LR',
+                                            'name': 'TenGigabitEthernet1/7',
+                                            'pid': 'SFP-10G-LR-S',
+                                            'sn': 'AVD1232KBIJ',
+                                            'vid': 'V01'
+                                            }
+                                        },
+                                '8': {
+                                        'GLC-SX-MMD': {
+                                            'descr': '1000BaseSX',
+                                            'name': 'TenGigabitEthernet1/8',
+                                            'pid': 'GLC-SX-MMD',
+                                            'sn': 'FNS123407FK',
+                                            'vid': 'V01'
+                                            }
+                                        },
+                                '9': {
+                                        'GLC-SX-MMD': {
+                                            'descr': '1000BaseSX',
+                                            'name': 'TenGigabitEthernet1/9',
+                                            'pid': 'GLC-SX-MMD',
+                                            'sn': 'FNS123408KL',
+                                            'vid': 'V01'
+                                            }
+                                        },
+                                '10': {
+                                        'GLC-SX-MMD': {
+                                            'descr': '1000BaseSX',
+                                            'name': 'TenGigabitEthernet1/10',
+                                            'pid': 'GLC-SX-MMD',
+                                            'sn': 'FNS123407LM',
+                                            'vid': 'V01'
+                                            }
+                                        },
+                                '11': {
+                                        'GLC-TE': {
+                                            'descr': '1000BaseT',
+                                            'name': 'TenGigabitEthernet1/11',
+                                            'pid': 'GLC-TE',
+                                            'sn': 'AVC123121MN',
+                                            'vid': 'V01'
+                                            }
+                                        },
+                                '15': {
+                                        'SFP-10G-SR': {
+                                            'descr': 'SFP-10Gbase-SR',
+                                            'name': 'TenGigabitEthernet1/15',
+                                            'pid': 'SFP-10G-SR',
+                                            'sn': 'AVD1239A1NO',
+                                            'vid': 'V03'
+                                            }
+                                        },
+                                '16': {
+                                        'SFP-10G-SR': {
+                                            'descr': 'SFP-10Gbase-SR',
+                                            'name': 'TenGigabitEthernet1/16',
+                                            'pid': 'SFP-10G-SR',
+                                            'sn': 'AVD1239A3PQ',
+                                            'vid': 'V03'
+                                            }
+                                        }
+                                       },
+                                   }
+                },
+                'rp': {
+                        'WS-C4500X-16': {
+                            'descr': '4500X-16 10GE (SFP+)',
+                            'name': 'Supervisor(slot 1)',
+                            'pid': 'WS-C4500X-16',
+                            'sn': 'JAE123507BC',
+                            'vid': 'V03'
+                            }
+                        }
+                },
+                'P1': {
+                        'other': {
+                            'C4KX-PWR-750AC-R': {
+                                'descr': 'Power Supply ( AC 750W )',
+                                'name': 'Power Supply 1',
+                                'pid': 'C4KX-PWR-750AC-R',
+                                'sn': 'ART1236X0QR',
+                                'vid': 'V01'
+                            }
+                        }
+                },
+                'P2': {
+                        'other': {
+                            'C4KX-PWR-750AC-R': {
+                                'descr': 'Power Supply ( AC 750W )',
+                                 'name': 'Power Supply 2',
+                                 'pid': 'C4KX-PWR-750AC-R',
+                                 'sn': 'ART1236X0RS',
+                                 'vid': 'V01'
+                            }
+                        }
+                    }
+                }
+                }
+
+    golden_output_c4500x = {'execute.return_value': '''\
+        NAME: "Switch System", DESCR: "Cisco Systems, Inc. WS-C4500X-16 2 slot switch "
+        PID:                   , VID:      , SN: JAE123507AB
+
+        NAME: "Supervisor(slot 1)", DESCR: "4500X-16 10GE (SFP+)"
+        PID: WS-C4500X-16      , VID: V03  , SN: JAE123507BC
+
+        NAME: "TenGigabitEthernet1/1", DESCR: "SFP-10Gbase-SR"
+        PID: SFP-10G-SR        , VID: V03  , SN: AVD1239A4CD
+
+        NAME: "TenGigabitEthernet1/2", DESCR: "SFP-10Gbase-SR"
+        PID: SFP-10G-SR        , VID: V03  , SN: AVD1239A4DE
+
+        NAME: "TenGigabitEthernet1/3", DESCR: "1000BaseT"
+        PID: SFP-GE-T          , VID: V02  , SN: MTC123300EF
+
+        NAME: "TenGigabitEthernet1/4", DESCR: "SFP-10Gbase-SR"
+        PID: SFP-10G-SR-S      , VID: V01  , SN: AVD1233DUFG
+
+        NAME: "TenGigabitEthernet1/5", DESCR: "1000BaseSX"
+        PID: GLC-SX-MMD        , VID: V01  , SN: FNS12300JGH
+
+        NAME: "TenGigabitEthernet1/6", DESCR: "SFP-10Gbase-SR"
+        PID: SFP-10G-SR-S      , VID: V01  , SN: AVD1236DNHI
+
+        NAME: "TenGigabitEthernet1/7", DESCR: "SFP-10Gbase-LR"
+        PID: SFP-10G-LR-S      , VID: V01  , SN: AVD1232KBIJ
+
+        NAME: "TenGigabitEthernet1/8", DESCR: "1000BaseSX"
+        PID: GLC-SX-MMD        , VID: V01  , SN: FNS123407FK
+
+        NAME: "TenGigabitEthernet1/9", DESCR: "1000BaseSX"
+        PID: GLC-SX-MMD        , VID: V01  , SN: FNS123408KL
+
+        NAME: "TenGigabitEthernet1/10", DESCR: "1000BaseSX"
+        PID: GLC-SX-MMD        , VID: V01  , SN: FNS123407LM
+
+        NAME: "TenGigabitEthernet1/11", DESCR: "1000BaseT"
+        PID: GLC-TE            , VID: V01  , SN: AVC123121MN
+
+        NAME: "TenGigabitEthernet1/15", DESCR: "SFP-10Gbase-SR"
+        PID: SFP-10G-SR        , VID: V03  , SN: AVD1239A1NO
+
+        NAME: "TenGigabitEthernet1/16", DESCR: "SFP-10Gbase-SR"
+        PID: SFP-10G-SR        , VID: V03  , SN: AVD1239A3PQ
+
+        NAME: "Power Supply 1", DESCR: "Power Supply ( AC 750W )"
+        PID: C4KX-PWR-750AC-R  , VID: V01  , SN: ART1236X0QR
+
+        NAME: "Power Supply 2", DESCR: "Power Supply ( AC 750W )"
+        PID: C4KX-PWR-750AC-R  , VID: V01  , SN: ART1236X0RS
+    '''}
+
     def test_empty(self):
         self.dev1 = Mock(**self.empty_output)
         inventory_obj = ShowInventory(device=self.dev1)
@@ -1603,6 +1818,13 @@ PID: ASR1006-PWR-AC    , VID: V01  , SN: ART1210Q04C
         inventory_obj = ShowInventory(device=self.dev_asr1k)
         parsed_output = inventory_obj.parse()
         self.assertEqual(parsed_output,self.golden_parsed_output_asr1k)
+
+    def test_golden_c4500x(self):
+        self.maxDiff = None
+        self.dev_c4500x = Mock(**self.golden_output_c4500x)
+        inventory_obj = ShowInventory(device=self.dev_c4500x)
+        parsed_output = inventory_obj.parse()
+        self.assertEqual(parsed_output,self.golden_parsed_output_c4500x)
 
 class test_show_platform(unittest.TestCase):
     dev1 = Device(name='empty')

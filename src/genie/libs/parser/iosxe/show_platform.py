@@ -978,7 +978,7 @@ class ShowInventory(ShowInventorySchema):
         else:
             out = output
 
-        name = descr = slot = subslot = pid = ''
+        name = descr = slot = subslot = pid = mod = ''
         inventory_dict = {}
         for line in out.splitlines():
             line = line.rstrip()
@@ -1017,7 +1017,7 @@ class ShowInventory(ShowInventorySchema):
                     if slot not in inventory_dict['slot']:
                         inventory_dict['slot'][slot] = {}
 
-                p1_4 = re.compile(r'\s*\S+ *\d+[ /]*(?P<subslot>\d+.*)$')
+                p1_4 = re.compile(r'\s*[^\s/]+ *\d+[ /]*(?P<subslot>\d+.*)$')
                 m = p1_4.match(name)
                 if m:
                     subslot = m.groupdict()['subslot']
@@ -1089,6 +1089,11 @@ class ShowInventory(ShowInventorySchema):
                             inventory_dict['slot'][slot]['rp'][old_pid]['subslot'][subslot][pid]['sn'] = sn
                             slot = subslot = ''
                         elif subslot:
+                            if 'lc' not in inventory_dict['slot'][slot]:
+                                inventory_dict['slot'][slot]['lc'] = {}
+                            if mod == '':
+                                mod = 'builtin'
+                                inventory_dict['slot'][slot]['lc'][mod] = {}
                             if 'subslot' not in inventory_dict['slot'][slot]['lc'][mod]:
                                 inventory_dict['slot'][slot]['lc'][mod]['subslot'] = {}
                             if subslot not in inventory_dict['slot'][slot]['lc'][mod]['subslot']:
