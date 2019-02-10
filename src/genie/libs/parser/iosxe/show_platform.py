@@ -1008,15 +1008,17 @@ class ShowInventory(ShowInventorySchema):
                     if slot not in inventory_dict['slot']:
                         inventory_dict['slot'][slot] = {}
 
-                if 'Power Supply Module' in name:
-                    slot = name.replace('Power Supply Module ', 'P')
+                p1_3 = re.compile(r'Power Supply( Module)?')
+                m = p1_3.match(name)
+                if m:
+                    slot = re.sub(r'Power Supply( Module)? ', 'P', name)
                     if 'slot' not in inventory_dict:
                         inventory_dict['slot'] = {}
                     if slot not in inventory_dict['slot']:
                         inventory_dict['slot'][slot] = {}
 
-                p1_3 = re.compile(r'\s*\S+ *\d+[ /]*(?P<subslot>\d+.*)$')
-                m = p1_3.match(name)
+                p1_4 = re.compile(r'\s*\S+ *\d+[ /]*(?P<subslot>\d+.*)$')
+                m = p1_4.match(name)
                 if m:
                     subslot = m.groupdict()['subslot']
                 continue
