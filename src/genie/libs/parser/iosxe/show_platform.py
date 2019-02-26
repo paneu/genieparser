@@ -1022,7 +1022,7 @@ class ShowInventory(ShowInventorySchema):
                 continue
 
             # check 2nd line
-            p2 = re.compile(r'^\s*PID\: +(?P<pid>\S+)\s+\,\s+VID\:\s+(?P<vid>\S+)\s+\,\s+SN\:\s+(?P<sn>.*)$')
+            p2 = re.compile(r'^\s*PID\: +(?P<pid>\S+)\s+\,\s+VID\:\s+(?P<vid>\S*)\s+\,\s+SN\:\s+(?P<sn>.*)$')
             m = p2.match(line)
             if m:
                 if 'WS-C' in pid:
